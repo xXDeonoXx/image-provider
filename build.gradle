@@ -7,7 +7,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        jdbc 'org.postgresql:postgresql:42.2.0'
+		compile group: 'postgresql', name: 'postgresql', version: '9.1-901.jdbc4'
 	}
 }
 

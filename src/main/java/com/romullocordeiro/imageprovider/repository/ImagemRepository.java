@@ -14,7 +14,7 @@ public interface ImagemRepository extends JpaRepository<Imagem, Long>{
 	Imagem findById(long id);
 	
 	@Async
-	@Query(nativeQuery = true, value="SELECT * FROM tb_imagem WHERE tag LIKE LOWER('%?1%')")
+	@Query(nativeQuery = true, value="UPDATE tb_imagem SET tag = UPPER(tag)")
     List<Imagem> findByTag(String tag);
 	
 	
@@ -29,5 +29,8 @@ public interface ImagemRepository extends JpaRepository<Imagem, Long>{
  * 
  * a querye abaixo busca todos valores que possuem 'anime' na tag
  * SELECT * FROM `tb_imagem` WHERE tag LIKE '%anime%'
+ * 
+ * 
+ * "SELECT * FROM tb_imagem WHERE tag ILIKE '%?1%'"
  * 
  */

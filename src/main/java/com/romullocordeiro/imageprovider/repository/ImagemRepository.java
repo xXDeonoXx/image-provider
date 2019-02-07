@@ -14,7 +14,7 @@ public interface ImagemRepository extends JpaRepository<Imagem, Long>{
 	Imagem findById(long id);
 	
 	@Async
-	@Query(nativeQuery = true, value="SELECT * FROM tb_imagem WHERE tag LIKE UPPER(%?1%)")
+	@Query(nativeQuery = true, value="SELECT * FROM tb_imagem WHERE tag LIKE CONCAT('%',UPPER('%?1%'),'%')")
     List<Imagem> findByTag(String tag);
 	
 	

@@ -36,7 +36,7 @@ public class ImagemResource {
 	//------------Retorna Todas imagens com tag X------------------
 	@GetMapping("/imagens/tag/{tag}")
 	public List<Imagem> listaImagens(@PathVariable(value="tag")String tag){
-		return imagemRepository.findByTag(tag);	
+		return imagemRepository.findByTagContainingIgnoreCase(tag);	
 	} 
 	
 	

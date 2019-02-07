@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,19 +21,19 @@ public class ImagemResource {
 	@Autowired
 	ImagemRepository imagemRepository;
 	
-	//Todas Imagens do banco
+	//-----------Retorna Todas Imagens do banco------------------
 	@GetMapping("/imagens")
 	public List<Imagem> listaImagens(){
 		return imagemRepository.findAll();		
 	}
 	
-    //imagem especifica com id X
+    //----------------Retorna imagem especifica com id X-----------------------
 	@GetMapping("/imagens/id/{id}")
 	public Imagem getOneImageById(@PathVariable(value="id") long id) {
 		return imagemRepository.findById(id);
 	}
 
-	//Todas imagens com tag X
+	//------------Retorna Todas imagens com tag X------------------
 	@GetMapping("/imagens/tag/{tag}")
 	public List<Imagem> listaImagens(@PathVariable(value="tag")String tag){
 		return imagemRepository.findByTag(tag);	
@@ -41,7 +43,10 @@ public class ImagemResource {
 	
 	//Posts
 	
-	
+	@PostMapping("/imagem")
+	public Imagem saveImagem(@RequestBody Imagem imagem) {
+		return imagemRepository.save(imagem);
+	}
 	
 	
 }

@@ -14,7 +14,7 @@ public interface ImagemRepository extends JpaRepository<Imagem, Long>{
 	Imagem findById(long id);
 	
 	@Async
-	@Query(nativeQuery = true, value="SELECT * FROM tb_imagem WHERE tag LIKE LOWER (%?1%)")
+	@Query(nativeQuery = true, value="SELECT * FROM tb_imagem WHERE tag LIKE LOWER('%?1%')")
     List<Imagem> findByTag(String tag);
 	
 	

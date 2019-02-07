@@ -50,7 +50,7 @@ public class Imagem implements Serializable{
 		return tag;
 	}
 	public void setTag(String tag) {
-		this.tag = tag;
+		this.tag = tag.toUpperCase();
 	}
 	public String getReference() {
 		return reference;

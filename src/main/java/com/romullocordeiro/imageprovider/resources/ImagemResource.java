@@ -69,7 +69,7 @@ public class ImagemResource {
 	}
 	
 	@PostMapping("/upload")
-	public void uploadImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	public String uploadImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		
 		try {
             // Get the file and save it somewhere
@@ -86,14 +86,14 @@ public class ImagemResource {
             	client.logout();
             	
             }catch(IOException e) {
-            	
+            	return e.getMessage();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-		
+		return "";
 		
 	}
 	

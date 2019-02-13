@@ -77,7 +77,7 @@ public class ImagemResource {
             InputStream stream = new ByteArrayInputStream(bytes);
             FTPClient client = new FTPClient();
             String filename = "" + RandomString.make(15) + ".jpeg";
-            System.out.println(stream.toString());
+            System.out.println(stream.read() + "");
             
             try {
             	client.connect(ftpHost);

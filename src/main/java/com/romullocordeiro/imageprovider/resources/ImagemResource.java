@@ -74,6 +74,7 @@ public class ImagemResource {
 		try {
             // Get the file and save it somewhere
             FTPClient client = new FTPClient();
+            client.enterLocalActiveMode();
             String filename = "" + RandomString.make(15) + ".png";
             System.out.println("Nome gerado para o arquivo: " + filename);
             System.out.println("File Input: " + file.getInputStream());

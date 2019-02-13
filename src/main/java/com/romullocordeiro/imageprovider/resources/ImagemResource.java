@@ -85,7 +85,7 @@ public class ImagemResource {
             	
             	client.storeFile(filename, stream);
             	client.logout();
-            	
+            	System.out.println("conectou com o FTP");
             }catch(IOException e) {
             	return e.getMessage();
             }

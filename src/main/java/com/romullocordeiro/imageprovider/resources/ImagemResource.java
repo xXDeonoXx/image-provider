@@ -82,6 +82,7 @@ public class ImagemResource {
             	System.out.println("Conseguiu Logar");
             	client.enterLocalActiveMode();
             	client.setFileType(FTP.BINARY_FILE_TYPE);
+            	client.setFileTransferMode(FTP.BINARY_FILE_TYPE);
             	
             	client.storeFile(filename, file.getInputStream()); 
             	client.logout();

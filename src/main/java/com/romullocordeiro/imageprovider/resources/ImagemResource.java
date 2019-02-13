@@ -71,6 +71,10 @@ public class ImagemResource {
 	@PostMapping("/upload")
 	public String uploadImage(@RequestParam("file") MultipartFile file) {
 		
+		//todo consegui fazer o FTP funcionar, porem preciso
+		//agora fazer o envio da imagem junto com as informações
+		//como nome, uploader e etc
+		
 		try {
             // Get the file and save it somewhere
             FTPClient client = new FTPClient();

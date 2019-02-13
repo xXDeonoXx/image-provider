@@ -69,20 +69,21 @@ public class ImagemResource {
 	}
 	
 	@PostMapping("/upload")
-	public String uploadImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	public String uploadImage(@RequestParam("file") MultipartFile file) {
 		
 		try {
             // Get the file and save it somewhere
             FTPClient client = new FTPClient();
-            String filename = "" + RandomString.make(15) + ".jpeg";
+            String filename = "" + RandomString.make(15) + ".png";
             System.out.println("Nome gerado para o arquivo: " + filename);
+            System.out.println("File Input: " + file.getInputStream());
             
             client.connect(ftpHost);
             if(client.login(ftpLogin, ftpPassword) && !file.isEmpty()) {
             	System.out.println("Conseguiu Logar");
             	client.enterLocalActiveMode();
             	client.setFileType(FTP.BINARY_FILE_TYPE);
-            	client.setFileTransferMode(FTP.BINARY_FILE_TYPE);
+            	client.changeWorkingDirectory("/public_html/Imagens");
             	
             	client.storeFile(filename, file.getInputStream()); 
             	client.logout();
@@ -99,7 +100,7 @@ public class ImagemResource {
            
         }
 
-	    return "redirect:/www.google.com";
+	    return "redirect:/";
 
 		
 	}

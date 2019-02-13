@@ -37,17 +37,6 @@ public class Imagem implements Serializable{
     	this.reference = reference;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 	public long getId() {
 		return id;
 	}
@@ -69,8 +58,8 @@ public class Imagem implements Serializable{
 	public String getTags() {
 		return tags;
 	}
-	public void setTags(String tag) {
-		this.tags = tag.toUpperCase();
+	public void setTags(String tags) {
+		this.tags = tags.toUpperCase();
 	}
 	public String getReference() {
 		return reference;

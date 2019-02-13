@@ -87,7 +87,7 @@ public class ImagemResource {
             	client.logout();
             	System.out.println("conectou com o FTP");
             }catch(IOException e) {
-            	return e.getMessage();
+            	System.out.println(e.getMessage()); 
             }
 
         } catch (IOException e) {

@@ -76,8 +76,7 @@ public class ImagemResource {
 	public Imagem uploadImage(@RequestParam(value = "file", required = true) MultipartFile file,
 			@RequestParam(value = "name", required = true) String name, 
 			@RequestParam(value = "uploader", required = true) String uploader,
-			@RequestParam(value = "tag", required = true) String tag,
-			@RequestParam(value = "reference", required = true) String reference) {
+			@RequestParam(value = "tag", required = true) String tag) {
 		
 		//todo consegui fazer o FTP funcionar, porem preciso
 		//agora fazer o envio da imagem junto com as informações
@@ -111,7 +110,7 @@ public class ImagemResource {
            
         }
 		try {
-			Imagem imagem = new Imagem(name, uploader, tag, reference + generatedName);
+			Imagem imagem = new Imagem(name, uploader, tag, databaseUrl + generatedName);
 		    return imagemRepository.save(imagem);
 
 		}catch(Exception e) {

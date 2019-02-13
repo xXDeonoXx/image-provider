@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class ImagemResource {
 	final String ftpHost = "files.000webhost.com";
 	final String ftpLogin = "romulloimagedatabase";
 	final String ftpPassword = "maluquinho1";
+	final String databaseUrl = "https://romulloimagedatabase.000webhostapp.com/Imagens/";
 	
 	//-----------Retorna Todas Imagens do banco------------------
 	@GetMapping("/imagens")
@@ -68,24 +70,31 @@ public class ImagemResource {
 		return null;
 	}
 	
+	
+	
 	@PostMapping("/upload")
-	public String uploadImage(@RequestParam("file") MultipartFile file) {
+	public Imagem uploadImage(@RequestParam(value = "file", required = true) MultipartFile file,
+			@RequestParam(value = "nome", required = true) String name, 
+			@RequestParam(value = "uploader", required = true) String uploader,
+			@RequestParam(value = "tags", required = true) String tags,
+			@RequestParam(value = "reference", required = true) String reference) {
 		
 		//todo consegui fazer o FTP funcionar, porem preciso
 		//agora fazer o envio da imagem junto com as informações
 		//como nome, uploader e etc
 		
+		
+		String generatedName = "";
 		try {
-            // Get the file and save it somewhere
+            // Envia o arquivo por ftp para o servidor de arquivos
             FTPClient client = new FTPClient();
             client.enterLocalActiveMode();
-            String filename = "" + RandomString.make(15) + ".png";
-            System.out.println("Nome gerado para o arquivo: " + filename);
-            System.out.println("File Input: " + file.getInputStream());
+            generatedName = RandomString.make(15) + ".png";
+            String filename = generatedName;
+            
             
             client.connect(ftpHost);
             if(client.login(ftpLogin, ftpPassword) && !file.isEmpty()) {
-            	System.out.println("Conseguiu Logar");
             	client.enterLocalPassiveMode();
             	client.setFileType(FTP.BINARY_FILE_TYPE);
             	client.changeWorkingDirectory("/public_html/Imagens");
@@ -93,9 +102,6 @@ public class ImagemResource {
             	client.storeFile(filename, file.getInputStream()); 
             	client.logout();
             	client.disconnect();
-            	System.out.println("Possivelmente Funcionou");
-            }else {
-            	
             }
             
 
@@ -104,8 +110,13 @@ public class ImagemResource {
             System.out.println(e.getMessage());
            
         }
+		try {
+			Imagem imagem = new Imagem(name, uploader, tags, reference + generatedName);
+		    return imagemRepository.save(imagem);
 
-	    return "redirect:/";
+		}catch(Exception e) {
+			return null;
+		}
 
 		
 	}

@@ -25,8 +25,28 @@ public class Imagem implements Serializable{
 	
     private String name;
     private String uploader;
-    private String tag;
+    private String tags;
     private String reference;
+    
+    
+    
+    public Imagem (String name, String uploader, String tags, String reference) {
+    	this.name = name;
+    	this.uploader = uploader;
+    	this.tags = tags;
+    	this.reference = reference;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 	public long getId() {
 		return id;
@@ -47,10 +67,10 @@ public class Imagem implements Serializable{
 		this.uploader = uploader;
 	}
 	public String getTag() {
-		return tag;
+		return tags;
 	}
 	public void setTag(String tag) {
-		this.tag = tag.toUpperCase();
+		this.tags = tag.toUpperCase();
 	}
 	public String getReference() {
 		return reference;

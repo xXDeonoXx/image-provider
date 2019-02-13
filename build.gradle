@@ -28,5 +28,7 @@ dependencies {
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'	
 	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
+	compile group: 'commons-net', name: 'commons-net', version: '3.6'
+	
 	
 }

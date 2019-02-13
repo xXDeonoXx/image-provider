@@ -29,7 +29,9 @@ public class Imagem implements Serializable{
     private String reference;
     
     
-    
+    public Imagem() {
+    	
+    }
     public Imagem (String name, String uploader, String tag, String reference) {
     	this.name = name;
     	this.uploader = uploader;

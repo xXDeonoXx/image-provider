@@ -69,7 +69,7 @@ public class ImagemResource {
 	}
 	
 	@PostMapping("/upload")
-	public String uploadImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	public void uploadImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		
 		try {
             // Get the file and save it somewhere
@@ -77,7 +77,7 @@ public class ImagemResource {
             InputStream stream = new ByteArrayInputStream(bytes);
             FTPClient client = new FTPClient();
             String filename = "" + RandomString.make(15) + ".jpeg";
-            System.out.println(stream.read() + "");
+            System.out.println(stream.read() + "aaaaaaaa");
             
             try {
             	client.connect(ftpHost);
@@ -94,7 +94,7 @@ public class ImagemResource {
             e.printStackTrace();
         }
 
-		return "";
+		
 		
 	}
 	

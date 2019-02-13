@@ -72,7 +72,6 @@ public class ImagemResource {
 	public void uploadImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		
 		try {
-
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
             InputStream stream = new ByteArrayInputStream(bytes);

@@ -74,7 +74,7 @@ public class ImagemResource {
 	
 	@PostMapping("/upload")
 	public Imagem uploadImage(@RequestParam(value = "file", required = true) MultipartFile file,
-			@RequestParam(value = "nome", required = true) String name, 
+			@RequestParam(value = "name", required = true) String name, 
 			@RequestParam(value = "uploader", required = true) String uploader,
 			@RequestParam(value = "tag", required = true) String tag,
 			@RequestParam(value = "reference", required = true) String reference) {

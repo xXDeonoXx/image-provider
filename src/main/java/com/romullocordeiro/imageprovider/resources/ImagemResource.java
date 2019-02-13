@@ -82,7 +82,7 @@ public class ImagemResource {
             client.connect(ftpHost);
             if(client.login(ftpLogin, ftpPassword) && !file.isEmpty()) {
             	System.out.println("Conseguiu Logar");
-            	client.enterLocalActiveMode();
+            	client.enterLocalPassiveMode();
             	client.setFileType(FTP.BINARY_FILE_TYPE);
             	client.changeWorkingDirectory("/public_html/Imagens");
             	

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
 
@@ -69,32 +69,34 @@ public class ImagemResource {
 	}
 	
 	@PostMapping("/upload")
-	public void uploadImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	public String uploadImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		
 		try {
             // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            InputStream stream = new ByteArrayInputStream(bytes);
             FTPClient client = new FTPClient();
             String filename = "" + RandomString.make(15) + ".jpeg";
-            System.out.println(stream.read() + "aaaaaaaa");
+            System.out.println("Nome gerado para o arquivo: " + filename);
             
-            try {
-            	client.connect(ftpHost);
-            	client.login(ftpLogin, ftpPassword);
+            client.connect(ftpHost);
+            if(client.login(ftpLogin, ftpPassword)) {
+            	client.enterLocalActiveMode();
+            	client.setFileType(FTP.BINARY_FILE_TYPE);
             	
-            	client.storeFile(filename, stream);
+            	client.storeFile(filename, file.getInputStream()); 
             	client.logout();
-            	System.out.println("conectou com o FTP");
-            }catch(IOException e) {
-            	System.out.println(e.getMessage()); 
+            	client.disconnect();
+            	System.out.println("Possivelmente Funcionou");
+            }else {
+            	
             }
+            
 
-        } catch (IOException e) {
+        	} catch (IOException e) {
             e.printStackTrace();
         }
 
-		
+	    return "redirect:/www.google.com";
+
 		
 	}
 	

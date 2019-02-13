@@ -77,8 +77,9 @@ public class ImagemResource {
             String filename = "" + RandomString.make(15) + ".jpeg";
             System.out.println("Nome gerado para o arquivo: " + filename);
             
-            client.connect(ftpHost);
+            client.connect(ftpHost + "/public_html/Imagens");
             if(client.login(ftpLogin, ftpPassword)) {
+            	System.out.println("Conseguiu Logar");
             	client.enterLocalActiveMode();
             	client.setFileType(FTP.BINARY_FILE_TYPE);
             	

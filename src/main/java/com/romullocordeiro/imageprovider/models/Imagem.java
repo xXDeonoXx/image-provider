@@ -66,10 +66,10 @@ public class Imagem implements Serializable{
 	public void setUploader(String uploader) {
 		this.uploader = uploader;
 	}
-	public String getTag() {
+	public String getTags() {
 		return tags;
 	}
-	public void setTag(String tag) {
+	public void setTags(String tag) {
 		this.tags = tag.toUpperCase();
 	}
 	public String getReference() {

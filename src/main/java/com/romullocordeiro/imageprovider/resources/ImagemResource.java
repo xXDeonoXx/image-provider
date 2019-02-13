@@ -78,7 +78,7 @@ public class ImagemResource {
             System.out.println("Nome gerado para o arquivo: " + filename);
             
             client.connect(ftpHost);
-            if(client.login(ftpLogin, ftpPassword)) {
+            if(client.login(ftpLogin, ftpPassword) && !file.isEmpty()) {
             	System.out.println("Conseguiu Logar");
             	client.enterLocalActiveMode();
             	client.setFileType(FTP.BINARY_FILE_TYPE);

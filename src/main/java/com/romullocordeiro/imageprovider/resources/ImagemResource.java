@@ -61,17 +61,7 @@ public class ImagemResource {
 	
 	
 	//Posts
-	
-	@PostMapping("/imagem")
-	public Imagem saveImagem(@RequestParam String nome) {
-		
-		
-		
-		return null;
-	}
-	
-	
-	
+
 	@PostMapping("/upload")
 	public Imagem uploadImage(@RequestParam(value = "file", required = true) MultipartFile file,
 			@RequestParam(value = "name", required = true) String name, 
@@ -82,53 +72,48 @@ public class ImagemResource {
 		//agora fazer o envio da imagem junto com as informações
 		//como nome, uploader e etc
 		
-		
-		String generatedName = "";
-		try {
-            // Envia o arquivo por ftp para o servidor de arquivos
-            FTPClient client = new FTPClient();
-            client.enterLocalActiveMode();
-            generatedName = RandomString.make(15) + ".png";
-            String filename = generatedName;
-            
-            
-            client.connect(ftpHost);
-            if(client.login(ftpLogin, ftpPassword) && !file.isEmpty()) {
-            	client.enterLocalPassiveMode();
-            	client.setFileType(FTP.BINARY_FILE_TYPE);
-            	client.changeWorkingDirectory("/public_html/Imagens");
-            	
-            	client.storeFile(filename, file.getInputStream()); 
-            	client.logout();
-            	client.disconnect();
-            }
-            
+		if(name.length() <= 30 && uploader.length() <= 30 && tag.length() <=50) {
 
-        	} catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-           
-        }
-		try {
-			Imagem imagem = new Imagem(name, uploader, tag, databaseUrl + generatedName);
-		    return imagemRepository.save(imagem);
+			String generatedName = "";
+			try {
+	            // Envia o arquivo por ftp para o servidor de arquivos
+	            FTPClient client = new FTPClient();
+	            client.enterLocalActiveMode();
+	            generatedName = RandomString.make(15) + ".png";
+	            String filename = generatedName;
+	            
+	            
+	            client.connect(ftpHost);
+	            if(client.login(ftpLogin, ftpPassword) && !file.isEmpty()) {
+	            	client.enterLocalPassiveMode();
+	            	client.setFileType(FTP.BINARY_FILE_TYPE);
+	            	client.changeWorkingDirectory("/public_html/Imagens");
+	            	
+	            	client.storeFile(filename, file.getInputStream()); 
+	            	client.logout();
+	            	client.disconnect();
+	            }
+	            
 
-		}catch(Exception e) {
+	        	} catch (IOException e) {
+	            e.printStackTrace();
+	            System.out.println(e.getMessage());
+	           
+	        }
+			try {
+				Imagem imagem = new Imagem(name, uploader, tag, databaseUrl + generatedName);
+			    return imagemRepository.save(imagem);
+
+			}catch(Exception e) {
+				return null;
+			}	
+
+			
+		}else {
 			return null;
-		}
-
+		}		
 		
 	}
-	
-	/*
-	@PostMapping("/imagem")
-	public Imagem saveImagem(@RequestBody Imagem imagem) {
-		
-		
-		
-		return imagemRepository.save(imagem);
-	}
-	 */
 	
 	
 }

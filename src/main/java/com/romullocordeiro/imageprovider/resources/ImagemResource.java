@@ -115,7 +115,36 @@ public class ImagemResource {
 			return null;
 		}		
 		
+	}//fim upload
+	
+	
+
+	//------------------------Atualiza as informações de uma imagem especifa usando seu id para identificar------------------
+	@PostMapping("/update")
+	public Imagem updateImage(
+			@RequestParam(value = "id", required = true) int id,
+			@RequestParam(value = "name", required = true) String name, 
+			@RequestParam(value = "uploader", required = true) String uploader,
+			@RequestParam(value = "tag", required = true) String tag) {
+		
+
+			Imagem imagem = imagemRepository.findById(id);
+			try {
+				if(imagem != null) {
+					imagem.setName(name);
+					imagem.setUploader(uploader);
+					imagem.setTag(tag);
+					return imagemRepository.save(imagem);
+				}else {
+					System.out.println("CARA, DEU MERDA AQUI, A IMAGEM NÃO EXISTE, USA A ROTA DE UPLOAD PF MEU CHAPA");
+				}	
+			}catch(Exception e) {
+				System.out.println("meu patrao, deu uma merda fodida aqui");
+			}
+		
+		return null;
 	}
+
 	
 	
 }

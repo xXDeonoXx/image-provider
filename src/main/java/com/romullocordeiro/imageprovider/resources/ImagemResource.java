@@ -62,8 +62,10 @@ public class ImagemResource {
 	
 	//Posts
 
+	//--------------Envia uma imagem com suas informações para o servidor de imagens e salva no banco a referencia------------
 	@PostMapping("/upload")
-	public Imagem uploadImage(@RequestParam(value = "file", required = true) MultipartFile file,
+	public Imagem uploadImage(
+			@RequestParam(value = "file", required = true) MultipartFile file,
 			@RequestParam(value = "name", required = true) String name, 
 			@RequestParam(value = "uploader", required = true) String uploader,
 			@RequestParam(value = "tag", required = true) String tag) {

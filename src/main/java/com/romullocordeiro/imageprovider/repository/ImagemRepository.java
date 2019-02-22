@@ -14,7 +14,8 @@ public interface ImagemRepository extends JpaRepository<Imagem, Long>{
 	Imagem findById(long id);
 	
 	//@Async
-	//@Query(nativeQuery = true, value="SELECT * FROM tb_imagem WHERE tag LIKE '%?1%'")
+	@Query(nativeQuery = true, value="SELECT * FROM tb_imagem ORDER BY id")
+	public List<Imagem>findAllOrdered();
 	
     public List<Imagem> findByTagContainingIgnoreCase(String tag);
 	

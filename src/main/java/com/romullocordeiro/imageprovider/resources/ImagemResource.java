@@ -43,7 +43,8 @@ public class ImagemResource {
 	//-----------Retorna Todas Imagens do banco------------------
 	@GetMapping("/imagens")
 	public List<Imagem> listaImagens(){
-		return imagemRepository.findAll();		
+		//return imagemRepository.findAll();
+		return imagemRepository.findAllOrdered();
 	}
 	
     //----------------Retorna imagem especifica com id X-----------------------
@@ -120,6 +121,7 @@ public class ImagemResource {
 	
 
 	//------------------------Atualiza as informações de uma imagem especifa usando seu id para identificar------------------
+	//todo preciso testar o post de update abaixo
 	@PostMapping("/update")
 	public Imagem updateImage(
 			@RequestParam(value = "id", required = true) int id,

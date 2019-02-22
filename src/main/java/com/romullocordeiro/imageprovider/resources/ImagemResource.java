@@ -43,7 +43,6 @@ public class ImagemResource {
 	//-----------Retorna Todas Imagens do banco------------------
 	@GetMapping("/imagens")
 	public List<Imagem> listaImagens(){
-		//return imagemRepository.findAll();
 		return imagemRepository.findAllOrdered();
 	}
 	
@@ -146,6 +145,18 @@ public class ImagemResource {
 		
 		return null;
 	}
+	
+	@PostMapping("/delete")
+	public Imagem deleteImage(
+			@RequestParam(value = "id", required = true) int id){
+				Imagem imagem = imagemRepository.findById(id);
+				if(imagem != null) {
+					imagemRepository.delete(imagem);
+					return imagem;
+				}
+				System.out.println("Falha ao encontrar imagem para deletar, não existe");
+				return null;
+			}
 
 	
 	

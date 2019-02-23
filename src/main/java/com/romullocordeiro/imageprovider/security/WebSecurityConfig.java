@@ -20,6 +20,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private ImplementsUserDetailsService userDetailsService;
 
+	//agora preciso criar um usuario administrador no banco para usar no app
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http.csrf().disable().authorizeRequests()

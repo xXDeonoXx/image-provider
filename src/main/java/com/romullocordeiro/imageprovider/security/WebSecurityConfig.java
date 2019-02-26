@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		http.csrf().disable().authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/api/imagens").permitAll()
-		.antMatchers(HttpMethod.GET, "/api/imagens/tag").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/imagens/tag/").permitAll()
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()
 		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));

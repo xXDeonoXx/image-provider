@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable().authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/api/imagens").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/imagens/tag/*").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/upload").hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()
 		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));

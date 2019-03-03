@@ -9,7 +9,6 @@ public class ImageProviderApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ImageProviderApplication.class, args);
-		System.out.println(new BCryptPasswordEncoder().encode("5Urr0g4t35"));
 	}
 
 }

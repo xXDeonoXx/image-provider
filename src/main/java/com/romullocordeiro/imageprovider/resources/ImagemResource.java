@@ -159,7 +159,27 @@ public class ImagemResource {
 				Imagem imagem = imagemRepository.findById(id);
 				if(imagem != null) {
 					imagemRepository.delete(imagem);
-					return imagem;
+					//apaga a imagem no servidor FTP
+					try {
+						
+						FTPClient client = new FTPClient();
+			            //client.enterLocalActiveMode();			            
+			            client.connect(ftpHost);
+			            if(client.login(ftpLogin, ftpPassword)) {
+			            	boolean success = client.deleteFile(imagem.getName());
+			            	client.logout();
+			            	client.disconnect();
+			            	if(success) {
+			            		return imagem;
+			            	}
+			            }
+			            
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+
+					return null;
+					
 				}
 				System.out.println("Falha ao encontrar imagem para deletar, n�o existe");
 				return null;

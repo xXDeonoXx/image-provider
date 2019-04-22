@@ -34,7 +34,7 @@ public class ImagemResource {
 	@Autowired
 	ImagemRepository imagemRepository;
 	
-	//enderço e senha do servidor ftp
+	//endereÃ§o e senha do servidor ftp
 	final String ftpHost = "files.000webhost.com";
 	final String ftpLogin = "romulloimagedatabase";
 	final String ftpPassword = "maluquinho1";
@@ -62,7 +62,7 @@ public class ImagemResource {
 	
 	//Posts
 
-	//--------------Envia uma imagem com suas informações para o servidor de imagens e salva no banco a referencia------------
+	//--------------Envia uma imagem com suas informaï¿½ï¿½es para o servidor de imagens e salva no banco a referencia------------
 	@PostMapping("/upload")
 	public Imagem uploadImage(
 			@RequestParam(value = "file", required = true) MultipartFile file,
@@ -71,7 +71,7 @@ public class ImagemResource {
 			@RequestParam(value = "tag", required = true) String tag) {
 		
 		//todo consegui fazer o FTP funcionar, porem preciso
-		//agora fazer o envio da imagem junto com as informações
+		//agora fazer o envio da imagem junto com as informaï¿½ï¿½es
 		//como nome, uploader e etc
 		
 		if(name.length() <= 30 && uploader.length() <= 30 && tag.length() <=50) {
@@ -96,30 +96,33 @@ public class ImagemResource {
 	            	client.disconnect();
 	            }
 	            
+				try {
+					Imagem imagem = new Imagem(name, uploader, tag, databaseUrl + generatedName);
+				    return imagemRepository.save(imagem);
+
+				}catch(Exception e) {
+					return null;
+				}
+	            
 
 	        	} catch (IOException e) {
 	            e.printStackTrace();
 	            System.out.println(e.getMessage());
 	           
 	        }
-			try {
-				Imagem imagem = new Imagem(name, uploader, tag, databaseUrl + generatedName);
-			    return imagemRepository.save(imagem);
-
-			}catch(Exception e) {
-				return null;
-			}	
+	
 
 			
 		}else {
 			return null;
-		}		
+		}
+		return null;		
 		
 	}//fim upload
 	
 	
 
-	//------------------------Atualiza as informações de uma imagem especifa usando seu id para identificar------------------
+	//------------------------Atualiza as informaï¿½ï¿½es de uma imagem especifa usando seu id para identificar------------------
 	//todo preciso testar o post de update abaixo
 	@PostMapping("/update")
 	public Imagem updateImage(
@@ -137,7 +140,7 @@ public class ImagemResource {
 					imagem.setTag(tag);
 					return imagemRepository.save(imagem);
 				}else {
-					System.out.println("CARA, DEU MERDA AQUI, A IMAGEM NÃO EXISTE, USA A ROTA DE UPLOAD PF MEU CHAPA");
+					System.out.println("CARA, DEU MERDA AQUI, A IMAGEM Nï¿½O EXISTE, USA A ROTA DE UPLOAD PF MEU CHAPA");
 				}	
 			}catch(Exception e) {
 				System.out.println("meu patrao, deu uma merda fodida aqui");
@@ -154,7 +157,7 @@ public class ImagemResource {
 					imagemRepository.delete(imagem);
 					return imagem;
 				}
-				System.out.println("Falha ao encontrar imagem para deletar, não existe");
+				System.out.println("Falha ao encontrar imagem para deletar, nï¿½o existe");
 				return null;
 			}
 

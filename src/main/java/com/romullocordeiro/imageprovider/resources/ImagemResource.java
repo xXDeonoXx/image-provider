@@ -158,7 +158,7 @@ public class ImagemResource {
 			@RequestParam(value = "id", required = true) int id){
 				Imagem imagem = imagemRepository.findById(id);
 				if(imagem != null) {
-					imagemRepository.delete(imagem);
+					
 					//apaga a imagem no servidor FTP
 					try {
 						
@@ -173,6 +173,7 @@ public class ImagemResource {
 			            	client.logout();
 			            	client.disconnect();
 			            	if(success) {
+			            		//imagemRepository.delete(imagem);
 			            		return imagem;
 			            	}
 			            }

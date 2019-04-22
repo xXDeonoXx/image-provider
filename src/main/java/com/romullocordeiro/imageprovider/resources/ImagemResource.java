@@ -166,7 +166,10 @@ public class ImagemResource {
 			            //client.enterLocalActiveMode();			            
 			            client.connect(ftpHost);
 			            if(client.login(ftpLogin, ftpPassword)) {
-			            	boolean success = client.deleteFile(imagem.getName());
+			            	boolean success = client.deleteFile(
+			            			imagem.getReference().substring(
+			            					imagem.getReference().length() - 19
+			            					));
 			            	client.logout();
 			            	client.disconnect();
 			            	if(success) {

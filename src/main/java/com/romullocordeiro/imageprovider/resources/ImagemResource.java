@@ -94,17 +94,19 @@ public class ImagemResource {
 	            	client.storeFile(filename, file.getInputStream()); 
 	            	client.logout();
 	            	client.disconnect();
+	            	
+					try {
+						Imagem imagem = new Imagem(name, uploader, tag, databaseUrl + generatedName);
+					    return imagemRepository.save(imagem);
+
+					}catch(Exception e) {
+						return null;
+					}
+					
 	            }else {
 	            	System.out.println("Talvez a imagem seja nula!");
-	            }
-	            
-				try {
-					Imagem imagem = new Imagem(name, uploader, tag, databaseUrl + generatedName);
-				    return imagemRepository.save(imagem);
+	            }            
 
-				}catch(Exception e) {
-					return null;
-				}
 	            
 
 	        	} catch (IOException e) {

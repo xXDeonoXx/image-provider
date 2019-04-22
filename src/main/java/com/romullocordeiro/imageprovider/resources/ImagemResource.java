@@ -94,6 +94,8 @@ public class ImagemResource {
 	            	client.storeFile(filename, file.getInputStream()); 
 	            	client.logout();
 	            	client.disconnect();
+	            }else {
+	            	System.out.println("Talvez a imagem seja nula!");
 	            }
 	            
 				try {

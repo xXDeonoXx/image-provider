@@ -158,7 +158,6 @@ public class ImagemResource {
 			@RequestParam(value = "id", required = true) int id){
 				Imagem imagem = imagemRepository.findById(id);
 				if(imagem != null) {
-            		imagemRepository.delete(imagem);
 
 					//apaga a imagem no servidor FTP
 					try {
@@ -184,9 +183,6 @@ public class ImagemResource {
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
-
-					return null;
-					
 				}
 				System.out.println("Falha ao encontrar imagem para deletar, n�o existe");
 				return null;

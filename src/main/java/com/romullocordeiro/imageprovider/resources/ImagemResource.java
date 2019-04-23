@@ -158,7 +158,8 @@ public class ImagemResource {
 			@RequestParam(value = "id", required = true) int id){
 				Imagem imagem = imagemRepository.findById(id);
 				if(imagem != null) {
-					
+            		imagemRepository.delete(imagem);
+
 					//apaga a imagem no servidor FTP
 					try {
 						
@@ -169,13 +170,12 @@ public class ImagemResource {
 			            	String fileToDelete = imagem.getReference().substring(
 	            						imagem.getReference().length() - 19
 	            					);
-		            		System.out.println(fileToDelete);
 			            	client.changeWorkingDirectory("/public_html/Imagens");
 			            	boolean success = client.deleteFile(fileToDelete);
 			            	client.logout();
 			            	client.disconnect();
 			            	if(success) {
-			            		//imagemRepository.delete(imagem);
+			            		imagemRepository.delete(imagem);
 			            		System.out.println(fileToDelete);
 			            		return imagem;
 			            	}

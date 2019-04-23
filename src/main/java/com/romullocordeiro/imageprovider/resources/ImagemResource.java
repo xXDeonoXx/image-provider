@@ -169,6 +169,7 @@ public class ImagemResource {
 			            	String fileToDelete = imagem.getReference().substring(
 	            						imagem.getReference().length() - 19
 	            					);
+		            		System.out.println(fileToDelete);
 			            	boolean success = client.deleteFile(fileToDelete);
 			            	client.logout();
 			            	client.disconnect();

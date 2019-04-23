@@ -166,14 +166,15 @@ public class ImagemResource {
 			            //client.enterLocalActiveMode();			            
 			            client.connect(ftpHost);
 			            if(client.login(ftpLogin, ftpPassword)) {
-			            	boolean success = client.deleteFile(
-			            			imagem.getReference().substring(
-			            					imagem.getReference().length() - 19
-			            					));
+			            	String fileToDelete = imagem.getReference().substring(
+	            						imagem.getReference().length() - 19
+	            					);
+			            	boolean success = client.deleteFile(fileToDelete);
 			            	client.logout();
 			            	client.disconnect();
 			            	if(success) {
 			            		//imagemRepository.delete(imagem);
+			            		System.out.println(fileToDelete);
 			            		return imagem;
 			            	}
 			            }

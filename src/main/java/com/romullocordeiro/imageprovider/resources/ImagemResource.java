@@ -170,6 +170,7 @@ public class ImagemResource {
 	            						imagem.getReference().length() - 19
 	            					);
 		            		System.out.println(fileToDelete);
+			            	client.changeWorkingDirectory("/public_html/Imagens");
 			            	boolean success = client.deleteFile(fileToDelete);
 			            	client.logout();
 			            	client.disconnect();

@@ -37,7 +37,7 @@ public class ImagemResource {
 	//endereço e senha do servidor ftp
 	final String ftpHost = "files.000webhost.com";
 	final String ftpLogin = "romulloimagedatabase";
-	final String ftpPassword = "maluquinho1";
+	final String ftpPassword = "mypassword";
 	final String databaseUrl = "https://romulloimagedatabase.000webhostapp.com/Imagens/";
 	
 	//-----------Retorna Todas Imagens do banco------------------
